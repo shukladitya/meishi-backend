@@ -25,7 +25,7 @@ app.use(cors({ origin: "*" }));
 
 app.use(routes);
 
-const port = process.env.PORT;
+let port = process.env.PORT;
 if (port == null || port == "") {
   port = 9000;
 }
