@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <!-- Primary Meta Tags -->
+    <meta
+      name="title"
+      content="<%= profile.name %> <%= profile.title %> <%= profile.company %>"
+    />
+    <meta name="description" content="View digital meishi card." />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta
+      property="og:title"
+      content="<%= profile.name %> <%= profile.title %> <%= profile.company %>"
+    />
+    <meta property="og:description" content="View digital meishi card." />
+    <meta property="og:image" content="<%= profile.profile %>" />
+
+    <title>
+      <%= profile.name %> <%= profile.title %> <%= profile.company %>
+    </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
+    <script src="main.js"></script>
+  </head>
+  <body>
+    <style>
+      body {
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+          Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+      }
+      ::-webkit-scrollbar {
+        width: 0px;
+      }
+
+      .fullCard {
+        position: fixed;
+        top: 0;
+        left: 0px;
+        right: 0px;
+        bottom: 0;
+        background-color: white;
+        z-index: 10;
+        background: rgba(0, 0, 0, 0.2);
+        backdrop-filter: blur(6px);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .fullCardScff {
+        height: 100vh;
+        width: 400px;
+        background-color: white;
+        border-radius: 30px;
+        margin: auto 0px;
+        position: relative;
+        overflow: scroll;
+      }
+
+      .profileImage {
+        height: 350px;
+        width: 100%;
+        background-color: black;
+        background-size: cover;
+      }
+      .cardMatter {
+        width: 100%;
+        min-height: calc(100vh - 320px);
+        transform: translateY(-25px);
+        border-radius: 30px 30px 0 0;
+        background-color: yellow;
+        padding: 20px 0 0 0;
+      }
+      .cardMatter .identification {
+        background-color: white;
+        margin: 0px 20px;
+        border-radius: 30px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 15px 30px;
+      }
+      .identification h1 {
+        font-size: 20px;
+      }
+      .identification h2 {
+        font-size: 15px;
+        font-weight: 400;
+      }
+      .identification h3 {
+        font-size: 15px;
+        font-weight: 400;
+        font-style: italic;
+      }
+      .identification .logoImage {
+        height: 60px;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: contain;
+        width: 60px;
+      }
+
+      p {
+        margin: 20px 30px;
+        color: white;
+        font-size: 15px;
+        font-weight: 300;
+      }
+      .links {
+        background-color: white;
+        margin: 0px 20px;
+        border-radius: 30px;
+        padding: 10px 15px;
+      }
+      .links a {
+        display: grid;
+        grid-template-columns: 20% 80%;
+        text-decoration: none;
+        margin: 10px 0px 0 0;
+      }
+      .links ion-icon {
+        font-size: 40px;
+      }
+      .links h1 {
+        font-size: 20px;
+        font-weight: 400;
+      }
+      .bottomSticker {
+        height: 30px;
+        width: 100%;
+        position: absolute;
+        transform: translateY(-1px);
+      }
+    </style>
+    <div class="fullCard">
+      <div class="fullCardScff">
+        <div
+          class="profileImage"
+          style="background-image: url(<%= profile.profile %>)"
+        ></div>
+        <div class="cardMatter" style="background-color: <%= profile.theme %>">
+          <div class="identification">
+            <div style="color: <%= profile.theme %>">
+              <h1><%= profile.name %></h1>
+              <h2><%= profile.title %></h2>
+              <h3><%= profile.company %></h3>
+            </div>
+            <div
+              class="logoImage"
+              style="background-image: url(<%= profile.logo %>)"
+            ></div>
+          </div>
+          <p><%= profile.headline %></p>
+          <div class="links">
+            <div class="detailCompressed" style="display: none">
+              <%= profile.details %>
+            </div>
+          </div>
+          <div
+            class="bottomSticker"
+            style="background-color: <%= profile.theme %>"
+          ></div>
+        </div>
+      </div>
+    </div>
+    <script
+      type="module"
+      src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"
+    ></script>
+    <script
+      nomodule
+      src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"
+    ></script>
+    <script>
+      const mappedData = [
+        {
+          name: "Email",
+          icon: "mail",
+          placeholder: "abc@xyz.com",
+          href: "mailto:",
+          key: 1,
+        },
+        {
+          name: "Phone",
+          icon: "call",
+          placeholder: "0123456789",
+          href: "tel:",
+          key: 2,
+        },
+        {
+          name: "Address",
+          icon: "location",
+          placeholder: "Edogawa City, Tokyo, Japan",
+          href: "http://maps.google.com/?q=",
+          key: 3,
+        },
+        {
+          name: "Website",
+          icon: "earth",
+          placeholder: "www.xyz.com",
+          href: "http://",
+          key: 4,
+        },
+        {
+          name: "Link",
+          icon: "link",
+          placeholder: "www.xyz.com",
+          href: "http://",
+          key: 5,
+        },
+        {
+          name: "Twitter",
+          icon: "logo-twitter",
+          placeholder: "username",
+          href: "https://twitter.com/",
+          key: 6,
+        },
+        {
+          name: "Instagram",
+          icon: "logo-instagram",
+          placeholder: "username",
+          href: "https://www.instagram.com/",
+          key: 7,
+        },
+        {
+          name: "LinkdIn",
+          icon: "logo-linkedin",
+          placeholder: "username",
+          href: "https://twitter.com/",
+          key: 8,
+        },
+        {
+          name: "Facebook",
+          icon: "logo-facebook",
+          placeholder: "username",
+          href: "https://twitter.com/",
+          key: 9,
+        },
+      ];
+      doc = document.querySelector(".detailCompressed");
+      a = JSON.parse(doc.innerText)
+        .map(
+          (ele) => `<a
+                    target="_blank"
+                    href=
+                      ${
+                        mappedData.find(
+                          (element) => element.name === Object.keys(ele)[0]
+                        ).href + Object.values(ele)[0]
+                      }
+                    style="color:<%= profile.theme %>"
+                  >
+                    <ion-icon name=${
+                      mappedData.find(
+                        (element) => element.name === Object.keys(ele)[0]
+                      ).icon
+                    }></ion-icon>
+                      <h1>${Object.values(ele)[0]}</h1>
+                  </a>`
+        )
+        .join(" ");
+      document.querySelector(".links").innerHTML = a;
+    </script>
+  </body>
+</html>
